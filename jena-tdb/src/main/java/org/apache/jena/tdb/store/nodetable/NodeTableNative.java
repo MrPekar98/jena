@@ -39,7 +39,7 @@ import org.apache.jena.tdb.store.NodeId ;
 public class NodeTableNative implements NodeTable
 {
     protected ObjectFile objects ;
-    protected NodeTableNativesSplitter nodeHashToId;          // hash -> int
+    protected NodeTableNativeSplitter nodeHashToId;          // hash -> int
     private boolean syncNeeded = false ;    // Non-transactional mode sync.
     
     // Delayed construction - must call init explicitly.
@@ -54,7 +54,7 @@ public class NodeTableNative implements NodeTable
     
     protected void init(Index nodeToId, ObjectFile objectFile)
     {
-        this.nodeHashToId = NodeTableNativesSplitter.buildFromIndex(nodeToId, objectFile);
+        this.nodeHashToId = NodeTableNativeSplitter.buildFromIndex(nodeToId, objectFile);
         this.objects = objectFile;
     }
 

@@ -31,15 +31,15 @@ import java.util.Iterator;
 
 // TODO: Is method isVariable() for the numeric type?
 // Contains Index of each Node type (numeric, blank, literal and URI/IRI).
-public class NodeTableNativesSplitter implements Index
+public class NodeTableNativeSplitter implements Index
 {
   private Index nodeHashToIdUri, nodeHashToIdBlank, nodeHashToIdLiteral, nodeHashToIdNumeric;
   private ObjectFile objects;
 
   // Builder method. Separates index of notes into their representation.
-  public static NodeTableNativesSplitter buildFromIndex(Index nodes, ObjectFile objects)
+  public static NodeTableNativeSplitter buildFromIndex(Index nodes, ObjectFile objects)
   {
-    NodeTableNativesSplitter splitter = new NodeTableNativesSplitter();
+    NodeTableNativeSplitter splitter = new NodeTableNativeSplitter();
     splitter.objects = objects;
     distributeRecords(nodes, splitter);
 
@@ -47,7 +47,7 @@ public class NodeTableNativesSplitter implements Index
   }
 
   // Iterates index of records and separates them into each index Node representation.
-  private static void distributeRecords(Index main, NodeTableNativesSplitter splitter)
+  private static void distributeRecords(Index main, NodeTableNativeSplitter splitter)
   {
     Iterator<Record> it = main.iterator();
 
