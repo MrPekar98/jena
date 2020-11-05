@@ -79,16 +79,17 @@ public class NodeTableNativeSplitter implements Index
   // Not sure, but it seems like records are always inserted at index 0.
   private NodeId record2Id(Record record)
   {
-    // TODO: This is wrong. Maybe use Nodelib.decode() to convert Record directly to Node.
-    // TODO: Use this.objects.all() to find the correct pair.
-    return NodeLib.getNodeId(record, 0);
+    return NodeId.create(record.getValue());
   }
 
   // Converts NodeId instance into Node instance.
   private synchronized Node id2Node(NodeId id)
   {
-    if (NodeId.isDoesNotExist(id) || NodeId.isAny(id) || this.objects.length() <= id.getId())
+    if (NodeId.isDoesNotExist(id) || this.objects.length() <= id.getId())
       return null;
+
+    else if (NodeId.isAny(id))
+      return Node.ANY;
 
     return NodeLib.fetchDecode(id.getId(), this.objects);
   }
